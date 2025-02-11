@@ -11,7 +11,7 @@ Listed below are various aspects of the assignment.  When you turn in your work,
 
 __Yes__ 1 pt: All expected attributes for `Computer` class are present
 
-__Part__ 1 pt: All expected methods for `Computer` class are present
+__Yes__ 1 pt: All expected methods for `Computer` class are present
 
 __Yes__ 1 pt: Constructor for `Computer` class is present and sets attributes correctly
 

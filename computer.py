@@ -28,7 +28,7 @@ class Computer:
         self.operating_system = new_OS
 
     def __str__(self):
-        return f"Computer: {self.description} Processor: {self.processor_type} Hard Drive: {self.hard_drive_capacity} Memory: {self.memory} OS: {self.operating_system} Year: {self.year_made} Price: {self.price}"
+        return f"Computer: {self.description}, Processor: {self.processor_type}, Hard Drive: {self.hard_drive_capacity}GB, Memory: {self.memory}GB, OS: {self.operating_system}, Year: {self.year_made}, Price: ${self.price}"
     
     def update_price(self, new_price):
         self.price = new_price
@@ -36,18 +36,33 @@ class Computer:
     def update_year(self, new_year):
         self.year_made = new_year
 
-    def update_memory(self, new_memory):
-        self.memory = new_memory
+    def upgrade_memory(self, additional_memory):
+        self.memory += additional_memory
+    
+    def upgrade_hard_drive(self, additional_capacity):
+        self.hard_drive_capacity += additional_capacity
+    
+    def detailed_info(self):
+        return {
+            "description": self.description,
+            "processor_type": self.processor_type,
+            "hard_drive_capacity": self.hard_drive_capacity,
+            "memory": self.memory,
+            "operating_system": self.operating_system,
+            "year_made": self.year_made,
+            "price": self.price
+        }
 
 
 
+# Now, let's test it out!
 def main():
     description = "Gaming PC"
     processor_type = "Intel i7"
     hard_drive_capacity = 1000
     memory = 16
     operating_system = "Windows 11"
-    year_made = 2025
+    year_made = 2013
     price = 1000
     
 
@@ -57,6 +72,14 @@ def main():
     computer.refurbish("Windows 10")
     print(computer.operating_system)
 
+    computer.description = "Gaming PC 2"
+    print(computer.description)
+
+    computer.update_price(1500) 
+    print(computer.price)
+
+    computer.update_year(2025)
+    print(computer.year_made)
 
 if __name__ == "__main__": 
     main()
