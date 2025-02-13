@@ -27,7 +27,7 @@ class Computer:
     def refurbish(self, new_OS):
         self.operating_system = new_OS
 
-    def __str__(self):
+    def print_details(self):
         return f"Computer: {self.description}, Processor: {self.processor_type}, Hard Drive: {self.hard_drive_capacity}GB, Memory: {self.memory}GB, OS: {self.operating_system}, Year: {self.year_made}, Price: ${self.price}"
     
     def update_price(self, new_price):

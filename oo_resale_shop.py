@@ -46,7 +46,7 @@ class ResaleShop:
         else:
             print("Inventory is empty.")
 
-    def __str__(self):
+    def print_details(self):
         return f"Computer: {self.description} Processor: {self.processor_type} Hard Drive: {self.hard_drive_capacity} Memory: {self.memory} OS: {self.operating_system} Year: {self.year_made} Price: {self.price}"
     
 
