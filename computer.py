@@ -1,19 +1,6 @@
 class Computer:
 
-    # What attributes will it need?
-    description: str
-    processor_type: str
-    hard_drive_capacity: int
-    memory: int
-    operating_system: str
-    year_made: int
-    price: int
-
-
-    # How will you set up your constructor?
-    # Remember: in python, all constructors have the same name (__init__)
     def __init__(self, description, processor_type, hard_drive_capacity, memory, operating_system, year_made, price):
-        
         self.description = description
         self.processor_type = processor_type
         self.hard_drive_capacity = hard_drive_capacity
@@ -22,14 +9,22 @@ class Computer:
         self.year_made = year_made
         self.price = price
 
-    
-# What methods will you need?
-    def refurbish(self, new_OS):
-        self.operating_system = new_OS
+    def refurbish(self, new_OS=None):
+        """Update the price based on age, optionally update OS."""
+        from datetime import date
+        current_year = date.today().year
+        age = current_year - self.year_made
 
-    def print_details(self):
-        return f"Computer: {self.description}, Processor: {self.processor_type}, Hard Drive: {self.hard_drive_capacity}GB, Memory: {self.memory}GB, OS: {self.operating_system}, Year: {self.year_made}, Price: ${self.price}"
-    
+        if age > 5:
+            self.price = 200
+        elif age > 3:
+            self.price = 400
+        else:
+            self.price = 600
+
+        if new_OS:
+            self.operating_system = new_OS
+
     def update_price(self, new_price):
         self.price = new_price
 
@@ -38,24 +33,14 @@ class Computer:
 
     def upgrade_memory(self, additional_memory):
         self.memory += additional_memory
-    
+
     def upgrade_hard_drive(self, additional_capacity):
         self.hard_drive_capacity += additional_capacity
-    
-    def detailed_info(self):
-        return {
-            "description": self.description,
-            "processor_type": self.processor_type,
-            "hard_drive_capacity": self.hard_drive_capacity,
-            "memory": self.memory,
-            "operating_system": self.operating_system,
-            "year_made": self.year_made,
-            "price": self.price
-        }
 
+    def __str__(self):
+        return f"Computer: {self.description}, Processor: {self.processor_type}, Hard Drive: {self.hard_drive_capacity}GB, Memory: {self.memory}GB, OS: {self.operating_system}, Year: {self.year_made}, Price: ${self.price}"
 
-
-# Now, let's test it out!
+# OUTSIDE the class
 def main():
     description = "Gaming PC"
     processor_type = "Intel i7"
@@ -64,22 +49,21 @@ def main():
     operating_system = "Windows 11"
     year_made = 2013
     price = 1000
-    
 
     computer = Computer(description, processor_type, hard_drive_capacity, memory, operating_system, year_made, price)
     print(computer)
 
     computer.refurbish("Windows 10")
-    print(computer.operating_system)
+    print(computer)
 
     computer.description = "Gaming PC 2"
-    print(computer.description)
+    print(computer)
 
     computer.update_price(1500) 
-    print(computer.price)
+    print(computer)
 
     computer.update_year(2025)
-    print(computer.year_made)
+    print(computer)
 
-if __name__ == "__main__": 
+if __name__ == "__main__":
     main()

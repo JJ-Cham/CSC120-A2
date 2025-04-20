@@ -4,6 +4,7 @@ from typing import Dict, Union
 # Import the functions we wrote in procedural_resale_shop.py
 from procedural_resale_shop import buy, update_price, sell, print_inventory, refurbish
 
+
 """ This helper function takes in a bunch of information about a computer,
     and packages it up into a python dictionary to make it easier to store
 
@@ -11,6 +12,7 @@ from procedural_resale_shop import buy, update_price, sell, print_inventory, ref
     explicit data types (str, int, etc.) listed in a python function. We're 
     going to go the extra step, because when we get to Java it'll be required!
 """
+
 def create_computer(description: str,
                     processor_type: str,
                     hard_drive_capacity: int,
@@ -28,51 +30,56 @@ def create_computer(description: str,
     }
 
 def main():
-    
-    # First, let's make a computer
+
+    # First, let's make a Computer object
     computer = create_computer(
-        "Mac Pro (Late 2013)",
-        "3.5 GHc 6-Core Intel Xeon E5",
-        1024, 64,
-        "macOS Big Sur", 2013, 1500
+        description="Mac Pro (Late 2013)",
+        processor_type="3.5 GHz 6-Core Intel Xeon E5",
+        hard_drive_capacity=1024,  
+        memory=64,                 
+        operating_system="macOS Big Sur",
+        year_made=2013,
+        price=1500
     )
 
+    
     # Print a little banner
     print("-" * 21)
     print("COMPUTER RESALE STORE")
     print("-" * 21)
 
     # Add it to the resale store's inventory
-    print("Buying", computer["description"])
+    print("Buying:", computer.description)
     print("Adding to inventory...")
-    computer_id = buy(computer)
+    shop.buy(computer)
     print("Done.\n")
 
-    # Make sure it worked by checking inventory
+    # Check inventory
     print("Checking inventory...")
-    print_inventory()
+    shop.print_inventory()
     print("Done.\n")
 
-    # Now, let's refurbish it
-    new_OS = "MacOS Monterey"
-    print("Refurbishing Item ID:", computer_id, ", updating OS to", new_OS)
-    print("Updating inventory...")
-    refurbish(computer_id, new_OS)
+    # Refurbish it (update OS + price)
+    new_OS = "macOS Monterey"
+    print(f"Refurbishing first computer, updating OS to {new_OS}...")
+    shop.refurbish(0, new_OS)  # 0 because it's the first computer
     print("Done.\n")
 
-    # Make sure it worked by checking inventory
+    # Check inventory again
     print("Checking inventory...")
-    print_inventory()
-    print("Done.\n")
-    
-    # Now, let's sell it!
-    print("Selling Item ID:", computer_id)
-    sell(computer_id)
-    
-    # Make sure it worked by checking inventory
-    print("Checking inventory...")
-    print_inventory()
+    shop.print_inventory()
     print("Done.\n")
 
-# Calls the main() function when this file is run
-if __name__ == "__main__": main()
+    # Sell it
+    print("Selling first computer...")
+    shop.sell(0)
+    print("Done.\n")
+
+    # Check inventory one last time
+    print("Checking inventory...")
+    shop.print_inventory()
+    print("Done.\n")
+
+# Run the main function
+if __name__ == "__main__":
+    main()
